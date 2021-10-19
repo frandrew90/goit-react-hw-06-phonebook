@@ -35,12 +35,6 @@
 // ===================TOOLKIT==================================================================
 import { createAction } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
-// import {
-//   ADD_CONTACT,
-//   GET_CONTACTS,
-//   REMOVE_CONTACT,
-//   FIND_CONTACT,
-// } from './phonebook-types';
 
 export const addNewContact = createAction(
   'phonebook/addContact',
