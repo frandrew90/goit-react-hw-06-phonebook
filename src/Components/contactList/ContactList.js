@@ -12,9 +12,7 @@ const ContactList = ({ filtered, removeContact, contactsList }) => {
     );
   };
   const findContact = onFindContact(filtered, contactsList);
-  console.log('contactsList', contactsList);
 
-  console.log('filtered', filtered);
   return (
     <ul>
       {findContact &&

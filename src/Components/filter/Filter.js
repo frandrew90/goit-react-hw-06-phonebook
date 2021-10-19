@@ -2,21 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import s from './Filter.module.css';
 import { connect } from 'react-redux';
-import {
-  // getAllContacts,
-  // addNewContact,
-  // removeContact,
-  findContact,
-} from '../../Redux/phonebook/phonebook-actions';
+import { findContact } from '../../Redux/phonebook/phonebook-actions';
 
 const Filter = ({ filter, findContact }) => {
   const handleChange = e => {
     const { value } = e.target;
-    // console.log('value', value);
+
     findContact(value);
   };
 
-  console.log('filter', filter);
   return (
     <label className={s.filter}>
       Find contacts by name:
@@ -36,9 +30,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  // getAllContacts,
-  // addNewContact,
-  // removeContact,
   findContact,
 };
 

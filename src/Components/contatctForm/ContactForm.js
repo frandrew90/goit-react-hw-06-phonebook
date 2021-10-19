@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { addNewContact } from '../../Redux/phonebook/phonebook-actions';
 
 const ContactForm = ({ contatcs, addNewContact }) => {
-  console.log(contatcs);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
