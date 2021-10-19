@@ -1,8 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import s from './Filter.module.css';
+import { connect } from 'react-redux';
+import {
+  // getAllContacts,
+  // addNewContact,
+  // removeContact,
+  findContact,
+} from '../../Redux/phonebook/phonebook-actions';
 
-const Filter = ({ onChange, filter }) => {
+const Filter = ({ filter, findContact }) => {
+  const handleChange = e => {
+    const { value } = e.target;
+    // console.log('value', value);
+    findContact(value);
+  };
+
+  console.log('filter', filter);
   return (
     <label className={s.filter}>
       Find contacts by name:
@@ -11,15 +25,26 @@ const Filter = ({ onChange, filter }) => {
         name="filter"
         type="text"
         value={filter}
-        onChange={onChange}
+        onChange={handleChange}
       />
     </label>
   );
 };
 
-export default Filter;
+const mapStateToProps = state => ({
+  filter: state.contacts.filter,
+});
 
-Filter.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired,
+const mapDispatchToProps = {
+  // getAllContacts,
+  // addNewContact,
+  // removeContact,
+  findContact,
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+
+// Filter.propTypes = {
+//   onChange: PropTypes.func.isRequired,
+//   filter: PropTypes.string.isRequired,
+// };

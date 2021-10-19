@@ -1,34 +1,56 @@
 import React from 'react';
+
+import { connect } from 'react-redux';
+import { removeContact } from '../../Redux/phonebook/phonebook-actions';
 import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
 
-const ContactList = ({ findContact, removeContact }) => {
+const ContactList = ({ filtered, removeContact, contactsList }) => {
+  const onFindContact = (filtered, contactsList) => {
+    return contactsList.filter(contact =>
+      contact.name.toLowerCase().includes(filtered.toLowerCase()),
+    );
+  };
+  const findContact = onFindContact(filtered, contactsList);
+  console.log('contactsList', contactsList);
+
+  console.log('filtered', filtered);
   return (
     <ul>
-      {findContact.map(contact => {
-        return (
-          <li className={s.contactListItem} key={contact.id}>
-            <span className={s.contactListName}>{contact.name}:</span>
-            &nbsp;
-            <span className={s.contactListNumber}>{contact.number}</span>
-            <button
-              className={s.contactListItemBtn}
-              type="button"
-              id={contact.id}
-              onClick={removeContact}
-            >
-              Delete
-            </button>
-          </li>
-        );
-      })}
+      {findContact &&
+        findContact.map(contact => {
+          return (
+            <li className={s.contactListItem} key={contact.id}>
+              <span className={s.contactListName}>{contact.name}:</span>
+              &nbsp;
+              <span className={s.contactListNumber}>{contact.number}</span>
+              <button
+                className={s.contactListItemBtn}
+                type="button"
+                id={contact.id}
+                onClick={() => removeContact(contact.id)}
+              >
+                Delete
+              </button>
+            </li>
+          );
+        })}
     </ul>
   );
 };
 
-export default ContactList;
+const mapStateToProps = state => ({
+  filtered: state.contacts.filter,
+  contactsList: state.contacts.items,
+});
 
-ContactList.propTypes = {
-  findContact: PropTypes.array.isRequired,
-  removeContact: PropTypes.func.isRequired,
+const mapDispatchToProps = {
+  removeContact,
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+
+// ContactList.propTypes = {
+//   findContact: PropTypes.array.isRequired,
+//   removeContact: PropTypes.func.isRequired,
+// };
