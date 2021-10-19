@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import s from './ContactForm.module.css';
+import { connect } from 'react-redux';
+import { addNewContact } from '../../Redux/phonebook/phonebook-actions';
 
-const ContactForm = ({ isThereContact, addNewContact }) => {
+const ContactForm = ({ contatcs, addNewContact }) => {
+  console.log(contatcs);
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -21,9 +24,12 @@ const ContactForm = ({ isThereContact, addNewContact }) => {
     if (isThereContact(name)) {
       return alert(`${name} has been already in contact list`);
     }
-    addNewContact({ name, number });
+    addNewContact(name, number);
     reset();
   };
+
+  const isThereContact = name =>
+    contatcs.some(contact => contact.name.toLowerCase() === name.toLowerCase());
 
   return (
     <form className={s.contactForm} onSubmit={handleSubmit}>
@@ -62,9 +68,17 @@ const ContactForm = ({ isThereContact, addNewContact }) => {
   );
 };
 
-export default ContactForm;
+const mapStateToProps = state => ({
+  contatcs: state.contacts.items,
+});
 
-ContactForm.propTypes = {
-  addNewContact: PropTypes.func.isRequired,
-  isThereContact: PropTypes.func.isRequired,
+const mapDispatchToProps = {
+  addNewContact,
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
+
+// ContactForm.propTypes = {
+//   addNewContact: PropTypes.func.isRequired,
+//   isThereContact: PropTypes.func.isRequired,
+// };

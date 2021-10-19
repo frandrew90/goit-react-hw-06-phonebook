@@ -22,45 +22,49 @@ const App = () => {
     localStorage.setItem('contacts', JSON.stringify(contactsList));
   }, [contactsList]);
 
-  const addNewContact = newContact => {
-    setСontactsList([...contactsList, { ...newContact, id: uuidv4() }]);
-  };
+  // const addNewContact = newContact => {
+  //   setСontactsList([...contactsList, { ...newContact, id: uuidv4() }]);
+  // };
 
   const handleChange = e => {
     const { name, value } = e.target;
     name === 'filter' && setFilter(value);
   };
 
-  const removeContact = e => {
-    const id = e.target.id;
-    setСontactsList(contactsList.filter(contact => contact.id !== id));
-  };
+  // const removeContact = e => {
+  //   const id = e.target.id;
+  //   setСontactsList(contactsList.filter(contact => contact.id !== id));
+  // };
 
-  const findContact = e => {
-    return contactsList.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase()),
-    );
-  };
+  // const findContact = e => {
+  //   return contactsList.filter(contact =>
+  //     contact.name.toLowerCase().includes(filter.toLowerCase()),
+  //   );
+  // };
 
-  const isThereContact = name =>
-    contactsList.some(
-      contact => contact.name.toLowerCase() === name.toLowerCase(),
-    );
+  // const isThereContact = name =>
+  //   contactsList.some(
+  //     contact => contact.name.toLowerCase() === name.toLowerCase(),
+  //   );
 
   return (
     <>
       <h1 className={s.title}>Phonebook</h1>
 
       <ContactForm
-        addNewContact={addNewContact}
-        isThereContact={isThereContact}
+      // addNewContact={addNewContact}
+      // isThereContact={isThereContact}
       />
 
       <h2 className={s.title}>Contacts</h2>
 
-      <Filter filter={filter} onChange={handleChange} />
+      {/* <Filter
+      // filter={filter} onChange={handleChange}
+      /> */}
 
-      <ContactList findContact={findContact()} removeContact={removeContact} />
+      {/* <ContactList
+      // findContact={findContact()} removeContact={removeContact}
+      /> */}
     </>
   );
 };
