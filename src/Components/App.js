@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllContacts } from '../Redux/phonebook/phonebook-actions';
 
@@ -45,3 +45,8 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+App.propTypes = {
+  getAllContacts: PropTypes.func.isRequired,
+  contacts: PropTypes.array.isRequired,
+};

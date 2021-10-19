@@ -77,7 +77,7 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
 
-// ContactForm.propTypes = {
-//   addNewContact: PropTypes.func.isRequired,
-//   isThereContact: PropTypes.func.isRequired,
-// };
+ContactForm.propTypes = {
+  addNewContact: PropTypes.func.isRequired,
+  contatcs: PropTypes.array.isRequired,
+};

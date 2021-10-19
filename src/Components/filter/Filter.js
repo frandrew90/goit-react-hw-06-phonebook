@@ -35,7 +35,7 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);
 
-// Filter.propTypes = {
-//   onChange: PropTypes.func.isRequired,
-//   filter: PropTypes.string.isRequired,
-// };
+Filter.propTypes = {
+  findContact: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
+};
